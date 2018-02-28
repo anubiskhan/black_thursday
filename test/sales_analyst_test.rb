@@ -123,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.bottom_merchants_by_invoice_count
 
     assert_instance_of Array, result
-    assert_instance_of nil, result[0]
+    assert_instance_of Merchant, result[0]
   end
 
   def test_it_can_find_average_invoices_per_weekday
@@ -221,6 +221,20 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 7, result.length
     assert_equal 'Shopin1901', result[0].name
     assert_equal 12334115, result[3].id
+  end
+
+  def test_find_merchants_by_month_registered
+    result = @sales_analyst.find_merchants_by_month_registered(3)
+
+    assert_instance_of Merchant, result[0]
+    assert_equal 4, result.length
+  end
+
+  def test_find_good_invoice_items
+    result = @sales_analyst.find_good_invoice_items(12_336_837)
+
+    assert_instance_of InvoiceItem, result[0]
+    assert_equal 205, result[0].id
   end
 
   def test_merchants_with_only_one_item_registered_in_month
