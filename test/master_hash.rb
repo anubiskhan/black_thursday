@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TestEngine
   def god_hash
     {
@@ -9,12 +11,4 @@ class TestEngine
       customers: 'test/fixtures/customers.csv'
     }
   end
-
-  # def god_hash
-  #   {
-  #   items: './data/items.csv',
-  #   merchants: './data/merchants.csv',
-  #   invoices: './data/invoices.csv'
-  #   }
-  # end
 end

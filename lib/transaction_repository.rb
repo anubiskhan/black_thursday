@@ -1,6 +1,9 @@
-require 'csv'
-require_relative 'transaction'
+# frozen_string_literal: true
 
+require 'csv'
+require_relative 'transaction.rb'
+
+# builds transaction repository class
 class TransactionRepository
   def initialize(filepath, parent)
     @transactions = []
