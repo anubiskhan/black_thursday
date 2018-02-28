@@ -132,7 +132,7 @@ class SalesAnalyst
     end
   end
 
-###
+
   def top_days_by_invoice_count
     mean = average_invoices_per_weekday
 
@@ -142,7 +142,7 @@ class SalesAnalyst
       end
     end
   end
-###
+
   def invoice_status(status)
     invoice_status_count = engine.invoices.find_all_by_status(status).length
 
@@ -178,7 +178,9 @@ class SalesAnalyst
     invoice_items = convert_to_invoice_items(valid_invoices)
 
     invoice_items.reduce(0) do |sum, invoice_item|
-      sum + (invoice_item.unit_price * invoice_item.quantity.to_i)
+
+      sum += (invoice_item.unit_price * invoice_item.quantity.to_i)
+      sum
     end
   end
 

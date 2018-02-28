@@ -73,7 +73,7 @@ class TransactionRepositoryTest < Minitest::Test
 
     assert_equal 18, result.id
     assert_equal 5, result.customer_id
-    assert_equal 12_334_123, result.merchant_id
+    assert_equal 12_334_271, result.merchant_id
     assert_equal :shipped, result.status
   end
 
