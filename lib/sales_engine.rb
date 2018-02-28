@@ -29,11 +29,11 @@ class SalesEngine
     @customers     = CustomerRepository.new(hash[:customers], self)
   end
 
-  def item_repo_finds_all_by_merchant_id(id)
+  def engine_finds_all_merchants_via_item_repo(id)
     @items.find_all_by_merchant_id(id)
   end
 
-  def merch_repo_find_all_by_id(id)
+  def engine_finds_merchant_via_merchant_repo(id)
     @merchants.find_by_id(id)
   end
 
@@ -43,10 +43,6 @@ class SalesEngine
 
   def engine_finds_invoice_via_invoice_id(id)
     @invoices.find_by_id(id)
-  end
-
-  def engine_finds_merchant_via_merchant_repo(id)
-    @merchants.find_by_id(id)
   end
 
   def engine_finds_items_via_invoice_items_repo(id)

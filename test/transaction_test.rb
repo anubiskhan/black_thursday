@@ -5,7 +5,6 @@ require_relative '../lib/transaction.rb'
 require_relative '../lib/sales_engine.rb'
 require_relative './master_hash.rb'
 
-
 class TransactionTest < Minitest::Test
   def setup
     test_engine = TestEngine.new.god_hash

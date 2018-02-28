@@ -28,6 +28,6 @@ class Item
   end
 
   def merchant
-    @parent.item_repo_goes_to_sales_engine_with_merchant_id(@merchant_id)
+    @parent.item_repo_finds_merchant_via_engine(@merchant_id)
   end
 end

@@ -57,8 +57,8 @@ class ItemRepository
     end
   end
 
-  def item_repo_goes_to_sales_engine_with_merchant_id(id)
-    @parent.merch_repo_find_all_by_id(id)
+  def item_repo_finds_merchant_via_engine(id)
+    @parent.engine_finds_merchant_via_merchant_repo(id)
   end
 
   def inspect
