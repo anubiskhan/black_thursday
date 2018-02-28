@@ -73,6 +73,23 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of Merchant, result
   end
 
+  def test_engine_finds_customer_via_customer_repo
+    result = @sales_engine.engine_finds_customer_via_customer_repo(1)
+    assert_instance_of Customer, result
+  end
+
+  def test_invoice_items_from_invoice
+    result = @sales_engine.invoice_items_from_invoice(3)
+
+    assert_equal 8, result.length
+  end
+
+  def test_engine_finds_items_via_invoice_items_repo
+    result = @sales_engine.engine_finds_items_via_invoice_items_repo(20)
+
+    assert_instance_of Array, result
+  end
+
   def test_engine_finds_merchant_customers_via_invoice_repo
     result = @sales_engine.engine_finds_merchant_customers_via_invoice_repo(12_335_955)
 
