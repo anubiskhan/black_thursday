@@ -3,11 +3,11 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/merchant_repository.rb'
 require_relative '../lib/sales_engine.rb'
-require_relative './master_hash.rb'
+require_relative './test_engine.rb'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    test_engine = TestEngine.new.god_hash
+    test_engine = TestEngine.new.test_hash
     sales_engine = SalesEngine.new(test_engine)
     @merchant_repo = sales_engine.merchants
   end
