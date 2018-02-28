@@ -130,6 +130,7 @@ class SalesAnalyst
     end
   end
 
+###
   def top_days_by_invoice_count
     mean = average_invoices_per_weekday
 
@@ -139,7 +140,7 @@ class SalesAnalyst
       end
     end
   end
-
+###
   def invoice_status(status)
     invoice_status_count = engine.invoices.find_all_by_status(status).length
 
@@ -199,11 +200,18 @@ class SalesAnalyst
     merchants_ranked_by_revenue[0..(number - 1)]
   end
 
+  def pending_invoices(invoice_list)
+    invoice_list.map do |invoice|
+      invoice if invoice.transactions.all? { |trans| trans.result == 'failed' }
+    end.compact
+  end
+
   def merchants_with_pending_invoices
     invoices = pending_invoices(@engine.invoices.all)
     invoices.map(&:merchant).uniq
   end
 
+####
   def merchants_with_only_one_item
     merchant_collector.map do |merchant|
       merchant if merchant.items.length == 1
@@ -224,6 +232,18 @@ class SalesAnalyst
       merchant if merchant.created_at.month == month_digit
     end.compact
   end
+#####
+
+  def invoice_items_collector
+    @invoice_items_collector ||= engine.invoice_items.all
+  end
+
+####
+  def find_good_invoice_items(merchant_id)
+    good_invoices = valid_invoices(find_merchant_invoices(merchant_id))
+    convert_to_invoice_items(good_invoices)
+  end
+####
 
   def most_sold_item_for_merchant(merchant_id)
     good_invoice_items = find_good_invoice_items(merchant_id)
@@ -237,16 +257,6 @@ class SalesAnalyst
     end
   end
 
-  def pending_invoices(invoice_list)
-    invoice_list.map do |invoice|
-      invoice if invoice.transactions.all? { |trans| trans.result == 'failed' }
-    end.compact
-  end
-
-  def invoice_items_collector
-    @invoice_items_collector ||= engine.invoice_items.all
-  end
-
   def best_item_for_merchant(merchant_id)
     good_invoice_items = find_good_invoice_items(merchant_id)
 
@@ -255,10 +265,5 @@ class SalesAnalyst
     end
 
     @engine.items.find_by_id(best_invoice_item.item_id)
-  end
-
-  def find_good_invoice_items(merchant_id)
-    good_invoices = valid_invoices(find_merchant_invoices(merchant_id))
-    convert_to_invoice_items(good_invoices)
   end
 end

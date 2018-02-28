@@ -21,7 +21,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.item_collector
 
     assert_instance_of Array, result
-    assert_instance_of Item, result[0]
+    assert (result.all? { |item| item.is_a?(Item)})
   end
 
   def test_can_return_average_items_per_merchant
@@ -45,7 +45,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_can_return_standard_deviation_items_per_merchant
-    #possible renaming opportunity ^
     result = @sales_analyst.average_items_per_merchant_standard_deviation
 
     assert_equal 0.58, result
@@ -55,7 +54,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.merchants_with_high_item_count
 
     assert_instance_of Array, result
-    assert_nil result[0]
+    assert_equal "GoldenRayPress", result[0].name
   end
 
   def test_can_find_average_item_price_of_merchant
@@ -77,6 +76,13 @@ class SalesAnalystTest < Minitest::Test
 
     assert_instance_of Array, result
 
+    assert_instance_of Item, result[0]
+  end
+
+  def test_invoice_collect_helper_method_works
+    result = @sales_analyst.item_collector
+
+    assert_instance_of Array, result
     assert_instance_of Item, result[0]
   end
 
@@ -120,7 +126,28 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Merchant, result[0]
   end
 
+  def test_it_can_find_average_invoices_per_weekday
+    result = @sales_analyst.average_invoices_per_weekday
+
+    assert_equal 8, result
+  end
+
+  def test_it_can_find_average_invoices_per_weekday
+    result = @sales_analyst.average_invoices_per_weekday_standard_deviation
+
+    assert_equal 3.45, result
+  end
+
+  def test_weekday_totals_returns_hash_with_weekday_invoice_total
+    skip
+    result = @sales_analyst.weekday_totals
+
+    assert_equal 7, result.length
+    assert_equal result[keys].include?("Wednesday")
+  end
+
   def test_can_find_top_days_by_invoice_count
+
     mean_weekday = @sales_analyst.average_invoices_per_weekday
     st_dv_weekday = @sales_analyst.average_invoices_per_weekday
     invoices_by_weekday = @sales_analyst.weekday_totals
@@ -151,20 +178,13 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_can_find_total_revenue_by_date
-    result = @sales_analyst.total_revenue_by_date('2005-11-11')
-
-    assert_equal 0.197336e4, result
-    assert_instance_of BigDecimal, result
-  end
-
-  def test_can_find_total_revenue_by_date
-    skip
-    date_invs = @sales_analyst.date_invoices('2005-11-11')
+    date = Time.parse('2005-11-11')
+    date_invs = @sales_analyst.date_invoices(date)
     valid_invs = @sales_analyst.valid_invoices(date_invs)
     invoice_items = @sales_analyst.convert_to_invoice_items(valid_invs)
     result = @sales_analyst.total_revenue_by_date('2005-11-11')
 
-    assert_equal 1, date_invs.length
+    assert_equal 2, date_invs.length
     assert_equal 1, valid_invs.length
     assert_equal 7, invoice_items
     assert_equal 0.197336e4, result
@@ -172,18 +192,22 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_can_find_revenue_by_merchant
+    merch_invs = @sales_analyst.find_merchant_invoices(12_336_837)
     result = @sales_analyst.revenue_by_merchant(12_336_837)
 
+    assert_equal 1, merch_invs.length
     assert_equal BigDecimal.new(986.68, 5), result
     assert_instance_of BigDecimal, result
   end
 
   def test_can_find_top_revenue_earners
     result = @sales_analyst.top_revenue_earners(10)
+    result_no_arg = @sales_analyst.top_revenue_earners
 
     assert_instance_of Array, result
     assert_instance_of Merchant, result[0]
     assert_equal 10, result.length
+    assert_equal 20, result_no_arg.length
   end
 
   def test_merchants_with_pending_invoices
@@ -210,25 +234,25 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 2, result.length
   end
 
-  def test_revenue_by_merchant
-    skip
-    result = @sales_analyst.revenue_by_merchant(12_334_135)
+  def test_invoice_item_helper_method_works
+    result = @sales_analyst.invoice_items_collector
 
-    assert_instance_of BigDecimal, result
-    assert_equal 1, result
+    assert_instance_of Array, result
+    assert (result.all? { |invoice_item| invoice_item.is_a?(InvoiceItem)})
   end
 
   def test_most_sold_item_for_merchant
-    skip
-    result = @sales_analyst.most_sold_item_for_merchant(12_334_135)
+    result = @sales_analyst.most_sold_item_for_merchant(12_336_837)
 
     assert_instance_of Array, result
+    assert_instance_of Item, result[0]
+    assert_equal "baby bonnet", result[0].name
   end
 
   def test_can_find_best_item_for_merchant
-    skip
     result = @sales_analyst.best_item_for_merchant(12_336_837)
 
     assert_instance_of Item, result
+    assert_equal "baby bonnet", result.name
   end
 end
