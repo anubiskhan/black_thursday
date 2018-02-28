@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'bigdecimal'
 require 'time'
 
+# builds the customer class
 class Customer
   attr_reader :id,
               :first_name,
@@ -18,6 +21,6 @@ class Customer
   end
 
   def merchants
-    @parent.customer_repo_finds_merchants_via_engine(self.id)
+    @parent.customer_repo_finds_merchants_via_engine(id)
   end
 end
