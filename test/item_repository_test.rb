@@ -17,7 +17,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_item_repository_can_hold_items
-    assert_equal 10, @item_repository.all.count
+    assert_equal 18, @item_repository.all.count
     assert (@item_repository.all.all? { |item| item.is_a?(Item) })
   end
 
@@ -97,6 +97,6 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_inspect
-    assert_equal '#<ItemRepository 10 rows>', @item_repository.inspect
+    assert_equal '#<ItemRepository 18 rows>', @item_repository.inspect
   end
 end

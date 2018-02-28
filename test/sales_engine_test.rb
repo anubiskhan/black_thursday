@@ -76,14 +76,14 @@ class SalesEngineTest < Minitest::Test
   def test_engine_finds_merchant_customers_via_invoice_repo
     result = @sales_engine.engine_finds_merchant_customers_via_invoice_repo(12_335_955)
 
-    assert_equal 7, result.length
+    assert_equal 2, result.length
     assert_instance_of Customer, result[0]
   end
 
   def test_engine_finds_customer_merchants_via_invoice_repo
     result = @sales_engine.engine_finds_customer_merchants_via_invoice_repo(1)
 
-    assert_equal 7, result.length
+    assert_equal 4, result.length
     assert_instance_of Merchant, result[0]
   end
 
@@ -100,7 +100,7 @@ class SalesEngineTest < Minitest::Test
 
     assert_equal 18, result.id
     assert_equal 5, result.customer_id
-    assert_equal 12_334_123, result.merchant_id
+    assert_equal 12_334_271, result.merchant_id
     assert_equal :shipped, result.status
   end
 
