@@ -1,6 +1,8 @@
-require_relative 'test_helper'
-require_relative '../lib/sales_engine'
-require_relative './master_hash'
+# frozen_string_literal: true
+
+require_relative 'test_helper.rb'
+require_relative '../lib/sales_engine.rb'
+require_relative './master_hash.rb'
 
 class SalesEngineTest < Minitest::Test
   def setup
@@ -21,7 +23,7 @@ class SalesEngineTest < Minitest::Test
 
     assert_instance_of MerchantRepository, merchant_repo
     assert_instance_of Merchant, merchant
-    assert_equal 12334105, merchant.id
+    assert_equal 12_334_105, merchant.id
     assert_equal 'Shopin1901', merchant.name
   end
 
@@ -32,7 +34,7 @@ class SalesEngineTest < Minitest::Test
 
     assert_instance_of ItemRepository, item_repo
     assert_instance_of Item, item
-    assert_equal 263395617, item.id
+    assert_equal 263_395_617, item.id
     assert_equal 'Glitter scrabble frames', item.name
   end
 
@@ -49,11 +51,11 @@ class SalesEngineTest < Minitest::Test
   def test_merchant_items_returns_items_array
     sales_engine = @sales_engine
 
-    merchant = sales_engine.merchants.find_by_id(12334141)
+    merchant = sales_engine.merchants.find_by_id(12_334_141)
     merchant.items
 
     assert_equal 1, merchant.items.count
-    assert_equal "510+ RealPush Icon Set", merchant.items[0].name
+    assert_equal '510+ RealPush Icon Set', merchant.items[0].name
   end
 
   def test_item_merchant_returns_merchant_instance
@@ -62,7 +64,7 @@ class SalesEngineTest < Minitest::Test
     item = sales_engine.items.find_by_id(263_395_237)
     item.merchant
 
-    assert_equal "jejum", item.merchant.name
+    assert_equal 'jejum', item.merchant.name
   end
 
   def test_engine_finds_merchant_via_merch_repo
@@ -85,12 +87,6 @@ class SalesEngineTest < Minitest::Test
     assert_instance_of Merchant, result[0]
   end
 
-  def test_engine_finds_customer_merchants_via_invoice_repo
-    result = @sales_engine.engine_finds_invoice_transactions_and_evaluates(46)
-
-    assert result
-  end
-
   def test_engine_finds_paid_invoice_and_returns_cost
     result = @sales_engine.engine_finds_paid_invoice_and_evaluates_cost(46)
     unpaid = @sales_engine.engine_finds_paid_invoice_and_evaluates_cost(14)
@@ -104,7 +100,7 @@ class SalesEngineTest < Minitest::Test
 
     assert_equal 18, result.id
     assert_equal 5, result.customer_id
-    assert_equal 12334123, result.merchant_id
+    assert_equal 12_334_123, result.merchant_id
     assert_equal :shipped, result.status
   end
 
@@ -112,7 +108,6 @@ class SalesEngineTest < Minitest::Test
     result = @sales_engine.engine_finds_transactions_via_invoice_id(2779)
 
     assert_equal 19, result[0].id
-    assert_equal 4318767847968505, result[0].credit_card_number
+    assert_equal 4_318_767_847_968_505, result[0].credit_card_number
   end
-
 end
