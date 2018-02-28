@@ -18,7 +18,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_invoice_item_repository_can_hold_items
     assert_equal 31, @invoice_item_repository.all.count
-    assert (@invoice_item_repository.all.all? { |inv_i| inv_i.is_a?(InvoiceItem)})
+    assert @invoice_item_repository.all.all? { |inv_i| inv_i.is_a?(InvoiceItem)}
   end
 
   def test_it_can_find_invoice_item_by_id
