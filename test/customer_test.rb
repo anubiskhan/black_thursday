@@ -59,7 +59,7 @@ class CustomerTest < Minitest::Test
     customer = @sales_engine.customers.find_by_id(1)
     customer.merchants
 
-    assert_equal 7, customer.merchants.length
+    assert_equal 4, customer.merchants.length
     assert_instance_of Merchant, customer.merchants[0]
   end
 end
