@@ -12,9 +12,9 @@ class CustomerTest < Minitest::Test
     @sales_engine = SalesEngine.new(test_engine)
     @customer = Customer.new(
       {
-        id: 7,
+        id:         7,
         first_name: 'Mary',
-        last_name: 'Jane',
+        last_name:  'Jane',
         created_at: '2018-02-21 19:23:23 UTC',
         updated_at: '2018-02-21 19:23:23 UTC'
       },
@@ -39,9 +39,9 @@ class CustomerTest < Minitest::Test
   def test_it_can_have_different_attributes
     customer2 = Customer.new(
       {
-        id: 12,
+        id:         12,
         first_name: 'Bob',
-        last_name: 'Hope',
+        last_name:  'Hope',
         created_at: '2018-12-01 19:23:23 UTC',
         updated_at: '2018-12-01 19:23:23 UTC'
       },

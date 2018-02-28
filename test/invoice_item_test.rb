@@ -12,10 +12,10 @@ class InvoiceItemTest < Minitest::Test
     @sales_engine = SalesEngine.new(test_engine)
     @invoice_item = InvoiceItem.new(
       {
-        id: 1,
-        item_id: 263_519_844,
+        id:         1,
+        item_id:    263_519_844,
         invoice_id: 1,
-        quantity: 5,
+        quantity:   5,
         unit_price: BigDecimal.new(13_635, 5),
         created_at: '2012-03-27 14:54:09 UTC',
         updated_at: '2012-03-27 14:54:09 UTC'
@@ -45,10 +45,10 @@ class InvoiceItemTest < Minitest::Test
   def test_it_can_have_different_attributes
     invoice_item = InvoiceItem.new(
       {
-        id: 13,
-        item_id: 999_519_844,
+        id:         13,
+        item_id:    999_519_844,
         invoice_id: 14,
-        quantity: 25,
+        quantity:   25,
         unit_price: BigDecimal.new(63_635, 5),
         created_at: '2012-03-27 14:54:09 UTC',
         updated_at: '2012-03-27 14:54:09 UTC'
