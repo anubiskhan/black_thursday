@@ -132,7 +132,7 @@ class SalesAnalyst
     end
   end
 
-###
+
   def top_days_by_invoice_count
     mean = average_invoices_per_weekday
 
@@ -142,7 +142,7 @@ class SalesAnalyst
       end
     end
   end
-###
+
   def invoice_status(status)
     invoice_status_count = engine.invoices.find_all_by_status(status).length
 

@@ -27,7 +27,7 @@ class SalesAnalystTest < Minitest::Test
   def test_can_return_average_items_per_merchant
     result = @sales_analyst.average_items_per_merchant
 
-    assert_equal 1.8, result
+    assert_equal 0.9, result
   end
 
   def test_standard_deviation_method_is_accurate
@@ -47,7 +47,7 @@ class SalesAnalystTest < Minitest::Test
   def test_can_return_standard_deviation_items_per_merchant
     result = @sales_analyst.average_items_per_merchant_standard_deviation
 
-    assert_equal 2.34, result
+    assert_equal 1.78, result
   end
 
   def test_can_find_merchants_with_high_item_count
@@ -67,7 +67,7 @@ class SalesAnalystTest < Minitest::Test
   def test_can_find_average_of_average_merchant_item_price
     result = @sales_analyst.average_average_price_per_merchant
 
-    assert_equal BigDecimal.new(13.91, 4), result
+    assert_equal BigDecimal.new(6.96, 3), result
     assert_instance_of BigDecimal, result
   end
 
@@ -76,14 +76,14 @@ class SalesAnalystTest < Minitest::Test
 
     assert_instance_of Array, result
 
-    assert_instance_of Item, result[0]
+    assert (result.all? { |item| item.is_a?(Item)})
   end
 
   def test_invoice_collect_helper_method_works
-    result = @sales_analyst.item_collector
+    result = @sales_analyst.invoice_collector
 
     assert_instance_of Array, result
-    assert_instance_of Item, result[0]
+    assert (result.all? { |invoice| invoice.is_a?(Invoice)})
   end
 
   def test_gets_standard_deviation_of_all_item_prices_helper_method
@@ -97,19 +97,19 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.merchant_collector
 
     assert_instance_of Array, result
-    assert_instance_of Merchant, result[0]
+    assert (result.all? { |merchant| merchant.is_a?(Merchant)})
   end
 
   def test_find_average_invoices_per_merchant
     result = @sales_analyst.average_invoices_per_merchant
 
-    assert_equal 6.5, result
+    assert_equal 2.05, result
   end
 
   def test_can_return_standard_deviation_invoices_per_merchant
     result = @sales_analyst.average_invoices_per_merchant_standard_deviation
 
-    assert_equal 3.24, result
+    assert_equal 0.65, result
   end
 
   def test_can_find_top_merchants_by_invoice_count
@@ -129,13 +129,13 @@ class SalesAnalystTest < Minitest::Test
   def test_it_can_find_average_invoices_per_weekday
     result = @sales_analyst.average_invoices_per_weekday
 
-    assert_equal 8, result
+    assert_equal 5.86, result
   end
 
-  def test_it_can_find_average_invoices_per_weekday
+  def test_it_can_find_average_invoices_per_weekday_standard_deviation
     result = @sales_analyst.average_invoices_per_weekday_standard_deviation
 
-    assert_equal 3.45, result
+    assert_equal 1.21, result
   end
 
   def test_weekday_totals_returns_hash_with_weekday_invoice_total
@@ -146,17 +146,16 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_can_find_top_days_by_invoice_count
-
     mean_weekday = @sales_analyst.average_invoices_per_weekday
-    st_dv_weekday = @sales_analyst.average_invoices_per_weekday
+    stdv_wkday = @sales_analyst.average_invoices_per_weekday_standard_deviation
     invoices_by_weekday = @sales_analyst.weekday_totals
     result = @sales_analyst.top_days_by_invoice_count
 
-    assert_equal 9.29, mean_weekday
-    assert_equal 9.29, st_dv_weekday
+    assert_equal 5.86, mean_weekday
+    assert_equal 1.21, stdv_wkday
     assert_equal 7, invoices_by_weekday.length
     assert_equal 0, invoices_by_weekday[:Friday]
-    assert_equal ['Friday'], result
+    assert_equal ['Monday'], result
   end
 
   def test_can_return_invoice_statuses_as_percent_share
@@ -164,16 +163,16 @@ class SalesAnalystTest < Minitest::Test
     shipped_result = @sales_analyst.invoice_status(:shipped)
     returned_result = @sales_analyst.invoice_status(:returned)
 
-    assert_equal 32.31, pending_result
-    assert_equal 63.08, shipped_result
-    assert_equal 4.62, returned_result
+    assert_equal 31.71, pending_result
+    assert_equal 58.54, shipped_result
+    assert_equal 9.76, returned_result
   end
 
   def test_merchants_ranked_by_revenue
     result = @sales_analyst.merchants_ranked_by_revenue
 
     assert_instance_of Array, result
-    assert_instance_of Merchant, result[0]
+    assert (result.all? { |merchant| merchant.is_a?(Merchant)})
   end
 
   def test_can_find_total_revenue_by_date
@@ -183,11 +182,10 @@ class SalesAnalystTest < Minitest::Test
     invoice_items = @sales_analyst.convert_to_invoice_items(valid_invs)
     result = @sales_analyst.total_revenue_by_date('2005-11-11')
 
-    assert_equal 2, date_invs.length
+    assert_equal 1, date_invs.length
     assert_equal 1, valid_invs.length
     assert_equal 1, invoice_items.length
-    assert_equal 0.197336e4, result
-    assert_instance_of BigDecimal, result
+    assert_equal 986.68, result
   end
 
   def test_can_find_revenue_by_merchant
@@ -212,7 +210,7 @@ class SalesAnalystTest < Minitest::Test
   def test_merchants_with_pending_invoices
     result = @sales_analyst.merchants_with_pending_invoices
 
-    assert_equal 10, result.length
+    assert_equal 19, result.length
     assert_equal 'Candisart', result[1].name
     assert_equal result, result.uniq
   end
