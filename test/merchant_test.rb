@@ -40,7 +40,7 @@ class MerchantTest < Minitest::Test
     merchant = @sales_engine.merchants.find_by_id(12_335_955)
     merchant.invoices
 
-    merchant_no_invoice = @sales_engine.merchants.find_by_id(12_334_145)
+    merchant_no_invoice = @sales_engine.merchants.find_by_id(12_334_296)
     merchant_no_invoice.invoices
 
     assert_equal 4, merchant.invoices.length
@@ -51,7 +51,7 @@ class MerchantTest < Minitest::Test
     merchant = @sales_engine.merchants.find_by_id(12_335_955)
     merchant.customers
 
-    assert_equal 7, merchant.customers.length
+    assert_equal 2, merchant.customers.length
     assert_instance_of Customer, merchant.customers[0]
   end
 end
