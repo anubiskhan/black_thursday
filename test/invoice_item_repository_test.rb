@@ -1,8 +1,9 @@
-require_relative 'test_helper'
-require_relative '../lib/invoice_item_repository'
-require_relative '../lib/sales_engine'
-require_relative './master_hash'
-require 'pry'
+# frozen_string_literal: true
+
+require_relative 'test_helper.rb'
+require_relative '../lib/invoice_item_repository.rb'
+require_relative '../lib/sales_engine.rb'
+require_relative './master_hash.rb'
 
 class InvoiceItemRepositoryTest < Minitest::Test
   def setup
@@ -51,7 +52,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_inspect
-    exp_result = "#<InvoiceItemRepository 31 rows>"
+    exp_result = '#<InvoiceItemRepository 31 rows>'
     assert_equal exp_result, @invoice_item_repository.inspect
   end
 end
