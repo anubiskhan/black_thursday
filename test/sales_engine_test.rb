@@ -7,7 +7,7 @@ require_relative './test_engine.rb'
 class SalesEngineTest < Minitest::Test
   def setup
     test_engine = TestEngine.new.test_hash
-    @sales_engine = SalesEngine.new(test_engine)
+    @sales_engine = SalesEngine.from_csv(test_engine)
   end
 
   def test_sales_engine_initializes

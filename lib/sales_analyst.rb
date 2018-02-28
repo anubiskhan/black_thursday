@@ -59,7 +59,7 @@ class SalesAnalyst
   def average_item_price_for_merchant(merch_id)
     merch_items = engine.merchants.find_by_id(merch_id).items
 
-    return 0 if merch_items.empty? #FLAGGED
+    return 0 if merch_items.empty?
     (merch_items.map do |item|
       item.unit_price.truncate(2)
     end.reduce(:+) / merch_items.length).round(2)
@@ -178,7 +178,6 @@ class SalesAnalyst
     invoice_items = convert_to_invoice_items(valid_invoices)
 
     invoice_items.reduce(0) do |sum, invoice_item|
-
       sum += (invoice_item.unit_price * invoice_item.quantity.to_i)
       sum
     end
@@ -215,7 +214,6 @@ class SalesAnalyst
     invoices.map(&:merchant).uniq
   end
 
-####
   def merchants_with_only_one_item
     merchant_collector.map do |merchant|
       merchant if merchant.items.length == 1
@@ -236,18 +234,15 @@ class SalesAnalyst
       merchant if merchant.created_at.month == month_digit
     end.compact
   end
-#####
 
   def invoice_items_collector
     @invoice_items_collector ||= engine.invoice_items.all
   end
 
-####
   def find_good_invoice_items(merchant_id)
     good_invoices = valid_invoices(find_merchant_invoices(merchant_id))
     convert_to_invoice_items(good_invoices)
   end
-####
 
   def most_sold_item_for_merchant(merchant_id)
     good_invoice_items = find_good_invoice_items(merchant_id)
