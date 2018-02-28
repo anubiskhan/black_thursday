@@ -178,7 +178,9 @@ class SalesAnalyst
     invoice_items = convert_to_invoice_items(valid_invoices)
 
     invoice_items.reduce(0) do |sum, invoice_item|
-      sum + (invoice_item.unit_price * invoice_item.quantity.to_i)
+
+      sum += (invoice_item.unit_price * invoice_item.quantity.to_i)
+      sum
     end
   end
 

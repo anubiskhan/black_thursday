@@ -180,12 +180,12 @@ class SalesAnalystTest < Minitest::Test
     date_invs = @sales_analyst.date_invoices(date)
     valid_invs = @sales_analyst.valid_invoices(date_invs)
     invoice_items = @sales_analyst.convert_to_invoice_items(valid_invs)
-    result = @sales_analyst.total_revenue_by_date('2005-11-11')
+    result = @sales_analyst.total_revenue_by_date(date)
 
     assert_equal 1, date_invs.length
     assert_equal 1, valid_invs.length
     assert_equal 1, invoice_items.length
-    assert_equal 986.68, result
+    assert_equal BigDecimal.new(986.68, 5), result
   end
 
   def test_can_find_revenue_by_merchant
