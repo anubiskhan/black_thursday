@@ -31,14 +31,14 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_standard_deviation_method_is_accurate
-    data_set = [3,4,5]
+    data_set = [3, 4, 5]
     result = @sales_analyst.standard_deviation(4, data_set)
 
     assert_equal 1.0, result
   end
 
   def test_mean_method_is_accurate
-    data_set = [3,4,5]
+    data_set = [3, 4, 5]
     result = @sales_analyst.find_mean(data_set)
 
     assert_equal 4, result
@@ -156,7 +156,7 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 9.29, st_dv_weekday
     assert_equal 7, invoices_by_weekday.length
     assert_equal 0, invoices_by_weekday[:Friday]
-    assert_equal ["Friday"], result
+    assert_equal ['Friday'], result
   end
 
   def test_can_return_invoice_statuses_as_percent_share

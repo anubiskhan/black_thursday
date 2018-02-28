@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'csv'
 require_relative 'customer.rb'
 
+# builds the customer repostitory
 class CustomerRepository
   def initialize(filepath, parent)
     @customers = []
