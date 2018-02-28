@@ -1,6 +1,9 @@
-require 'csv'
-require_relative 'invoice'
+# frozen_string_literal: true
 
+require 'csv'
+require_relative 'invoice.rb'
+
+# builds invoice repository class
 class InvoiceRepository
   def initialize(filepath, parent)
     @invoices = []

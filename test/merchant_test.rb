@@ -1,17 +1,22 @@
+# frozen_string_literal: true
+
 require_relative 'test_helper.rb'
 require_relative '../lib/merchant.rb'
 require_relative '../lib/sales_engine.rb'
 require_relative './master_hash.rb'
-require 'pry'
 
 class MerchantTest < Minitest::Test
   def setup
     test_engine = TestEngine.new.god_hash
     @sales_engine = SalesEngine.new(test_engine)
-    @merchant = Merchant.new({ :id         => '5',
-                               :name       => 'Turing School',
-                               :created_at => '2010-12-10' },
-                               @sales_engine.merchants)
+    @merchant = Merchant.new(
+      {
+        id:         '5',
+        name:       'Turing School',
+        created_at: '2010-12-10'
+      },
+      @sales_engine.merchants
+    )
   end
 
   def test_merchant_initializes

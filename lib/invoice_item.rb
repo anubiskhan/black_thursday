@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 require 'bigdecimal'
 require 'time'
+
+# builds invoice item class
 class InvoiceItem
   attr_reader :id,
               :item_id,
@@ -8,19 +12,18 @@ class InvoiceItem
               :unit_price,
               :created_at,
               :updated_at
-
   def initialize(data, parent)
-    @id = data[:id].to_i
-    @item_id = data[:item_id].to_i
-    @invoice_id = data[:invoice_id].to_i
-    @quantity = data[:quantity]
+    @id          = data[:id].to_i
+    @item_id     = data[:item_id].to_i
+    @invoice_id  = data[:invoice_id].to_i
+    @quantity    = data[:quantity]
     @unit_price  = BigDecimal.new(data[:unit_price], 4) / 100
     @created_at  = Time.parse(data[:created_at])
     @updated_at  = Time.parse(data[:updated_at])
-    @parent = parent
+    @parent      = parent
   end
 
   def unit_price_to_dollars
-    (@unit_price.to_f)
+    @unit_price.to_f
   end
 end

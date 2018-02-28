@@ -1,7 +1,9 @@
-require_relative 'test_helper'
-require_relative '../lib/invoice_repository'
-require_relative '../lib/sales_engine'
-require_relative './master_hash'
+# frozen_string_literal: true
+
+require_relative 'test_helper.rb'
+require_relative '../lib/invoice_repository.rb'
+require_relative '../lib/sales_engine.rb'
+require_relative './master_hash.rb'
 
 class InvoiceRepositoryTest < Minitest::Test
   def setup
@@ -20,14 +22,14 @@ class InvoiceRepositoryTest < Minitest::Test
     invoice_repository = @invoice_repository
 
     assert_equal 65, invoice_repository.all.length
-    assert (invoice_repository.all.all? { |invoice| invoice.is_a?(Invoice)})
+    assert (invoice_repository.all.all? { |invoice| invoice.is_a?(Invoice) })
   end
 
   def test_invoice_repository_holds_invoice_attributes
     invoice_repository = @invoice_repository
 
     assert_equal 1, invoice_repository.all.first.id
-    assert_equal 12335938, invoice_repository.all.first.merchant_id
+    assert_equal 12_335_938, invoice_repository.all.first.merchant_id
   end
 
   def test_it_can_find_invoice_by_id
@@ -56,7 +58,6 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 12_335_955, result[2].merchant_id
     assert result_nil.empty?
   end
-
 
   def test_it_can_find_all_invoices_by_merchant_id
     invoice_repository = @invoice_repository
@@ -112,10 +113,10 @@ class InvoiceRepositoryTest < Minitest::Test
     result = @invoice_repository.invoice_repo_finds_transactions_via_engine(2779)
 
     assert_equal 19, result[0].id
-    assert_equal 4318767847968505, result[0].credit_card_number
+    assert_equal 4_318_767_847_968_505, result[0].credit_card_number
   end
 
   def test_inspect
-    assert_equal "#<InvoiceRepository 65 rows>", @invoice_repository.inspect
+    assert_equal '#<InvoiceRepository 65 rows>', @invoice_repository.inspect
   end
 end

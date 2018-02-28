@@ -1,6 +1,9 @@
-require 'csv'
-require_relative 'item'
+# frozen_string_literal: true
 
+require 'csv'
+require_relative 'item.rb'
+
+# builds item repository class
 class ItemRepository
   def initialize(filepath, parent)
     @items = []

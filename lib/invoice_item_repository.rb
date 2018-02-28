@@ -1,8 +1,11 @@
-require 'csv'
-require_relative 'invoice_item'
+# frozen_string_literal: true
 
+require 'csv'
+require_relative 'invoice_item.rb'
+
+# builds invoice repository class
 class InvoiceItemRepository
-  def initialize(filepath= nil, parent = nil)
+  def initialize(filepath = nil, parent = nil)
     @invoice_items = []
     @parent = parent
     load_items(filepath)
