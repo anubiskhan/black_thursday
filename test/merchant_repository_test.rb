@@ -3,11 +3,11 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/merchant_repository.rb'
 require_relative '../lib/sales_engine.rb'
-require_relative './master_hash.rb'
+require_relative './test_engine.rb'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    test_engine = TestEngine.new.god_hash
+    test_engine = TestEngine.new.test_hash
     sales_engine = SalesEngine.new(test_engine)
     @merchant_repo = sales_engine.merchants
   end
@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
 
     assert_equal 20, merchant_repository.all.count
     assert_instance_of Array, merchant_repository.all
-    assert merchant_repository.all.all? { |merchant| merchant.is_a?(Merchant) }
+    assert (merchant_repository.all.all? { |merchant| merchant.is_a?(Merchant) })
     assert_equal 'Shopin1901', merchant_repository.all.first.name
   end
 

@@ -2,13 +2,13 @@
 
 require 'bigdecimal'
 require_relative 'test_helper.rb'
-require_relative './master_hash.rb'
+require_relative './test_engine.rb'
 require_relative '../lib/sales_analyst.rb'
 require_relative '../lib/sales_engine.rb'
 
 class SalesAnalystTest < Minitest::Test
   def setup
-    test_engine = TestEngine.new.god_hash
+    test_engine = TestEngine.new.test_hash
     @sales_engine = SalesEngine.new(test_engine)
     @sales_analyst = SalesAnalyst.new(@sales_engine)
   end
@@ -54,7 +54,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.merchants_with_high_item_count
 
     assert_instance_of Array, result
-    assert_equal "GoldenRayPress", result[0].name
+    assert_equal 'GoldenRayPress', result[0].name
   end
 
   def test_can_find_average_item_price_of_merchant
@@ -123,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.bottom_merchants_by_invoice_count
 
     assert_instance_of Array, result
-    assert_instance_of Merchant, result[0]
+    assert_instance_of nil, result[0]
   end
 
   def test_it_can_find_average_invoices_per_weekday
@@ -142,7 +142,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.weekday_totals
 
     assert_equal 7, result.length
-    assert result.keys.include?("Wednesday")
+    assert result.keys.include?('Wednesday')
   end
 
   def test_can_find_top_days_by_invoice_count
@@ -243,13 +243,13 @@ class SalesAnalystTest < Minitest::Test
 
     assert_instance_of Array, result
     assert_instance_of Item, result[0]
-    assert_equal "Waffle", result[0].name
+    assert_equal 'Waffle', result[0].name
   end
 
   def test_can_find_best_item_for_merchant
     result = @sales_analyst.best_item_for_merchant(12_334_135)
 
     assert_instance_of Item, result
-    assert_equal "Syrup", result.name
+    assert_equal 'Syrup', result.name
   end
 end

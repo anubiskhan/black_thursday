@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TestEngine
-  def god_hash
+  def test_hash
     {
       items: './test/fixtures/items.csv',
       merchants: './test/fixtures/merchants.csv',
