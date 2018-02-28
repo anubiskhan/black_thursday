@@ -132,7 +132,6 @@ class SalesAnalyst
     end
   end
 
-
   def top_days_by_invoice_count
     mean = average_invoices_per_weekday
 
