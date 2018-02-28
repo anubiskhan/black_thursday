@@ -40,7 +40,7 @@ class MerchantRepository
   end
 
   def merch_repo_find_items_via_engine(id)
-    @parent.item_repo_finds_all_by_merchant_id(id)
+    @parent.engine_finds_all_merchants_via_item_repo(id)
   end
 
   def merch_repo_finds_invoices_via_engine(id)

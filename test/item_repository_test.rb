@@ -86,11 +86,11 @@ class ItemRepositoryTest < Minitest::Test
     assert result_nil.empty?
   end
 
-  def test_item_repo_goes_to_sales_engine_with_merchant_id
+  def test_item_repo_finds_merchant_via_engine
     ir = @item_repository
-    result = ir.item_repo_goes_to_sales_engine_with_merchant_id(12_334_141)
+    result = ir.item_repo_finds_merchant_via_engine(12_334_141)
 
-    result_nil = ir.item_repo_goes_to_sales_engine_with_merchant_id(263_396_209)
+    result_nil = ir.item_repo_finds_merchant_via_engine(263_396_209)
 
     assert_instance_of Merchant, result
     assert_nil result_nil
