@@ -123,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.bottom_merchants_by_invoice_count
 
     assert_instance_of Array, result
-    assert_instance_of nil, result[0]
+    assert_instance_of Merchant, result[0]
   end
 
   def test_it_can_find_average_invoices_per_weekday

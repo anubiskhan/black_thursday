@@ -66,8 +66,7 @@ class InvoiceItemTest < Minitest::Test
   end
 
   def test_unit_price_converts_to_dollar
-    invoice_item = @invoice_item
-
-    assert_equal 136.35, invoice_item.unit_price_to_dollars
+    result = @invoice_item.unit_price_to_dollars
+    assert_equal 136.35, result   
   end
 end
