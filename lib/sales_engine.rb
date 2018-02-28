@@ -82,7 +82,7 @@ class SalesEngine
     transactions = @transactions.find_all_by_invoice_id(id)
 
     transactions.any? do |transaction|
-      transaction.result.casecmp 'success'
+      transaction.result.downcase == 'success'
     end
   end
 
