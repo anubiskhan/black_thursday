@@ -2,7 +2,6 @@
 
 require 'bigdecimal'
 require_relative 'sales_engine.rb'
-require 'pry'
 
 # builds sales analyst class
 class SalesAnalyst
