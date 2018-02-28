@@ -27,7 +27,7 @@ class SalesAnalystTest < Minitest::Test
   def test_can_return_average_items_per_merchant
     result = @sales_analyst.average_items_per_merchant
 
-    assert_equal 1.8, result
+    assert_equal 0.9, result
   end
 
   def test_standard_deviation_method_is_accurate
@@ -47,14 +47,14 @@ class SalesAnalystTest < Minitest::Test
   def test_can_return_standard_deviation_items_per_merchant
     result = @sales_analyst.average_items_per_merchant_standard_deviation
 
-    assert_equal 2.34, result
+    assert_equal 1.78, result
   end
 
   def test_can_find_merchants_with_high_item_count
     result = @sales_analyst.merchants_with_high_item_count
 
     assert_instance_of Array, result
-    assert_equal "GoldenRayPress", result[0].name
+    assert_equal 'GoldenRayPress', result[0].name
   end
 
   def test_can_find_average_item_price_of_merchant
@@ -103,13 +103,13 @@ class SalesAnalystTest < Minitest::Test
   def test_find_average_invoices_per_merchant
     result = @sales_analyst.average_invoices_per_merchant
 
-    assert_equal 6.5, result
+    assert_equal 3.85, result
   end
 
   def test_can_return_standard_deviation_invoices_per_merchant
     result = @sales_analyst.average_invoices_per_merchant_standard_deviation
 
-    assert_equal 3.24, result
+    assert_equal 3.87, result
   end
 
   def test_can_find_top_merchants_by_invoice_count
@@ -123,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
     result = @sales_analyst.bottom_merchants_by_invoice_count
 
     assert_instance_of Array, result
-    assert_instance_of Merchant, result[0]
+    assert_instance_of nil, result[0]
   end
 
   def test_it_can_find_average_invoices_per_weekday
@@ -135,14 +135,14 @@ class SalesAnalystTest < Minitest::Test
   def test_it_can_find_average_invoices_per_weekday
     result = @sales_analyst.average_invoices_per_weekday_standard_deviation
 
-    assert_equal 3.45, result
+    assert_equal 3.56, result
   end
 
   def test_weekday_totals_returns_hash_with_weekday_invoice_total
     result = @sales_analyst.weekday_totals
 
     assert_equal 7, result.length
-    assert result.keys.include?("Wednesday")
+    assert result.keys.include?('Wednesday')
   end
 
   def test_can_find_top_days_by_invoice_count
@@ -152,8 +152,8 @@ class SalesAnalystTest < Minitest::Test
     invoices_by_weekday = @sales_analyst.weekday_totals
     result = @sales_analyst.top_days_by_invoice_count
 
-    assert_equal 9.29, mean_weekday
-    assert_equal 9.29, st_dv_weekday
+    assert_equal 11.0, mean_weekday
+    assert_equal 11.0, st_dv_weekday
     assert_equal 7, invoices_by_weekday.length
     assert_equal 0, invoices_by_weekday[:Friday]
     assert_equal ['Friday'], result
@@ -164,9 +164,9 @@ class SalesAnalystTest < Minitest::Test
     shipped_result = @sales_analyst.invoice_status(:shipped)
     returned_result = @sales_analyst.invoice_status(:returned)
 
-    assert_equal 32.31, pending_result
-    assert_equal 63.08, shipped_result
-    assert_equal 4.62, returned_result
+    assert_equal 29.87, pending_result
+    assert_equal 62.34, shipped_result
+    assert_equal 7.79, returned_result
   end
 
   def test_merchants_ranked_by_revenue
@@ -212,7 +212,7 @@ class SalesAnalystTest < Minitest::Test
   def test_merchants_with_pending_invoices
     result = @sales_analyst.merchants_with_pending_invoices
 
-    assert_equal 10, result.length
+    assert_equal 18, result.length
     assert_equal 'Candisart', result[1].name
     assert_equal result, result.uniq
   end
@@ -245,13 +245,13 @@ class SalesAnalystTest < Minitest::Test
 
     assert_instance_of Array, result
     assert_instance_of Item, result[0]
-    assert_equal "Waffle", result[0].name
+    assert_equal 'Waffle', result[0].name
   end
 
   def test_can_find_best_item_for_merchant
     result = @sales_analyst.best_item_for_merchant(12_334_135)
 
     assert_instance_of Item, result
-    assert_equal "Syrup", result.name
+    assert_equal 'Syrup', result.name
   end
 end

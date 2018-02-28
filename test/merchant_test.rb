@@ -43,7 +43,7 @@ class MerchantTest < Minitest::Test
     merchant_no_invoice = @sales_engine.merchants.find_by_id(12_334_145)
     merchant_no_invoice.invoices
 
-    assert_equal 13, merchant.invoices.length
+    assert_equal 15, merchant.invoices.length
     assert merchant_no_invoice.invoices.empty?
   end
 

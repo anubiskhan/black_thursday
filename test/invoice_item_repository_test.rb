@@ -17,7 +17,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_invoice_item_repository_can_hold_items
-    assert_equal 31, @invoice_item_repository.all.count
+    assert_equal 34, @invoice_item_repository.all.count
     assert @invoice_item_repository.all.all? { |inv_i| inv_i.is_a?(InvoiceItem)}
   end
 
@@ -52,7 +52,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_inspect
-    exp_result = '#<InvoiceItemRepository 31 rows>'
+    exp_result = '#<InvoiceItemRepository 34 rows>'
     assert_equal exp_result, @invoice_item_repository.inspect
   end
 end
