@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
-require_relative 'invoice'
+require_relative 'invoice.rb'
 
 # builds invoice repository class
 class InvoiceRepository
