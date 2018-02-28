@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'bigdecimal'
 require_relative 'sales_engine.rb'
 require 'pry'
 
+# builds sales analyst class
 class SalesAnalyst
   attr_reader :engine
   def initialize(engine)
