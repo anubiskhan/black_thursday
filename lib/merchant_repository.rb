@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'csv'
 require_relative 'merchant.rb'
 
+# builds merchant repository class
 class MerchantRepository
   def initialize(file_path, parent)
     @merchants = []

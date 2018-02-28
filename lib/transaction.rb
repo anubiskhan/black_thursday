@@ -12,7 +12,6 @@ class Transaction
               :result,
               :created_at,
               :updated_at
-
   def initialize(data, parent)
     @id                          = data[:id].to_i
     @invoice_id                  = data[:invoice_id].to_i

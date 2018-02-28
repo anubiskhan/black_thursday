@@ -1,7 +1,9 @@
-require_relative 'test_helper'
-require_relative '../lib/sales_engine'
-require_relative '../lib/customer_repository'
-require_relative './master_hash'
+# frozen_string_literal: true
+
+require_relative 'test_helper.rb'
+require_relative '../lib/sales_engine.rb'
+require_relative '../lib/customer_repository.rb'
+require_relative './master_hash.rb'
 
 class CustomerRepositoryTest < Minitest::Test
   def setup
@@ -16,7 +18,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_customer_repository_can_hold_items
     assert_equal 50, @customer_repository.all.count
-    assert (@customer_repository.all.all? { |customer| customer.is_a?(Customer)})
+    assert @customer_repository.all.all? { |customer| customer.is_a?(Customer)}
   end
 
   def test_it_can_find_customer_by_id
@@ -59,6 +61,6 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_inspect
-    assert_equal "#<CustomerRepository 50 rows>", @customer_repository.inspect
+    assert_equal '#<CustomerRepository 50 rows>', @customer_repository.inspect
   end
 end
