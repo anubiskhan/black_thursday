@@ -83,7 +83,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_merch_repo_finds_customers_via_engine
     result = @merchant_repo.merch_repo_finds_customers_via_engine(12_335_955)
 
-    assert_equal 7, result.length
+    assert_equal 2, result.length
     assert_instance_of Customer, result[0]
   end
 

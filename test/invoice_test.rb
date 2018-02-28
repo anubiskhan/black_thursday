@@ -66,14 +66,12 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_invoice_items_returns_items_array
-    invoice = @sales_engine.invoices.find_by_id(2)
+    invoice = @sales_engine.invoices.find_by_id(3)
+    invoice_bad = @sales_engine.invoices.find_by_id(999)
+
     invoice.items
 
-    assert_equal 4, invoice.items.length
-
-    invoice_bad = @sales_engine.invoices.find_by_id(99)
-
-    assert_equal 4, invoice.items.length
+    assert_equal 8, invoice.items.length
     assert_nil invoice_bad
   end
 
